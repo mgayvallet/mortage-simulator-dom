@@ -3,6 +3,8 @@ const term = document.querySelector('#term')
 const rate = document.querySelector('#rate') 
 const calculateBtn = document.querySelector('.calculate-btn')
 const hidden = document.querySelectorAll('.hidden')
+const repayment = document.querySelector('#repayment')
+const interestOnly = document.querySelector('#interest-only')
 
 
 function calculate(amount, term, rate) {
@@ -17,8 +19,13 @@ function resultAffichage(result, totWithTerm) {
     const totalWithTerm = document.querySelector('#totalWithTerm')
     empty.style.display = 'none'
     notEmpty.style.display = 'block'
-    res.textContent = `£${result.toFixed(2)}`
     totalWithTerm.textContent = `£${totWithTerm}`
+    if (repayment.value == "on") {
+        res.textContent = `£${result.toFixed(2)}`
+
+    } else if (interestOnly.value == "on") {
+        res.textContent = `£${parseInt(amount.value) * ( parseFloat(rate.value)  / 100 )}`
+    }
 }
 
 
@@ -34,4 +41,5 @@ calculateBtn.addEventListener('click', (e) => {
             resultAffichage(resultat, totWithTerm)
         }
     }
+    console.log(parseInt(amount.value) * ( parseFloat(rate.value)  / 100 ));
 })
